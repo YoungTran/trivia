@@ -72,7 +72,8 @@ class QuizView extends Component {
         return;
       },
       error: (error) => {
-        alert("Unable to load question. Please try your request again");
+        window.location.href = "/play";
+        // alert("Unable to load question. Please try your request again");
         return;
       },
     });
