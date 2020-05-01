@@ -13,6 +13,161 @@ run command 'yarn install'
 run command 'yarn start'
 ```
 
+## GET routes
+
+GET `\categories`
+Returns JSON object of categories
+
+- _params: _ none
+- _success response_
+
+```
+{
+  "categories": {
+    "1": "Science",
+    "2": "Art",
+    "3": "Geography",
+    "4": "History",
+    "5": "Entertainment",
+    "6": "Sports"
+  },
+  "success": true
+}
+
+```
+
+GET `\questions?page=<page_number>`
+Fetches a paginated JSON Object of questions of all available categories
+
+- _Request parameters (optional):_ page:int
+- _Example response:_
+
+```{
+  "questions": [
+   {
+     "answer": "Young Tran",
+     "category": 1,
+     "difficulty": 5,
+     "id": 5,
+     "question": "What is the meaning of life?"
+   },
+   ...
+  ],
+  "success": true,
+  "total_questions": 2,
+  "categories": {
+    "1": "Science",
+    "2": "Art",
+    "3": "Geography",
+    "4": "History",
+    "5": "Entertainment",
+    "6": "Sports"
+  },
+  "current_category": null,
+}
+```
+
+DELETE `/questions/<question_id>`
+Delete question based on question_id
+
+- _Request arguments:_ question_id:int
+- _Example response:_
+
+```
+{
+  "success": true,
+  "deleted": 42
+
+}
+```
+
+POST `/questions`
+Add a new question to db
+
+- _Request body:_ {question:string, answer:string, difficulty:int, category:string}
+- _Example response:_
+
+```
+{
+  "success": true,
+  "created": 42
+
+}
+```
+
+POST `/questions/search`
+Return JSON Obj with array of questions filtered by searchTerm
+
+- _Request body:_ {searchTerm:string}
+- _Example response:_
+
+```
+{
+  "success": true,
+  "questions": [
+    {
+      "answer": "42",
+      "category": 2,
+      "difficulty": 5,
+      "id": 42,
+      "question": "What is the meaning of life?"
+    }
+  ],
+  "total_questions": 1,
+  "current_category": null
+}
+```
+
+GET `/categories/<int:category_id>/questions`
+Return JSON Obj with array of questions filtered by category
+
+- _Request argument:_ category_id:int
+- _Example response:_
+
+```
+{
+  "success": true,
+  "questions": [
+    {
+      "answer": "The Liver",
+      "category": 1,
+      "difficulty": 4,
+      "id": 4,
+      "question": "What is the heaviest organ in the human body?"
+    },
+    {
+      "answer": "Alexander Fleming",
+      "category": 1,
+      "difficulty": 3,
+      "id": 2,
+      "question": "Who discovered penicillin?"
+    },
+  ],
+
+  "total_questions": 2,
+  "current_category": 1
+}
+```
+
+POST `/quizzes`
+Returns a random question within a specified category. Handles no duplicate questions.
+
+- _Request body:_ {previous_questions: arr, quiz_category: {id:int, type:string}}
+- _Example response_:
+
+```
+{
+  "success": true,
+  "question": {
+    "answer": "42",
+    "category": 2,
+    "difficulty": 5,
+    "id": 42,
+    "question": "What is meaning of life?"
+  },
+}
+```
+
 ## Getting Started
 
 ### Installing Dependencies
